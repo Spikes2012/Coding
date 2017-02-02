@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+void reverse(int start, int end, int * arr){
+    int * left = &arr[start];
+    int * right = &arr[end];
+    
+    while( left < right ){
+        int tmp = *left;
+        *left = *right;
+        *right = tmp;
+        left++;
+        right--;
+    }
+}
+
+void print_array(int * arr, int n){
+    for( int i = 0; i < n; i++ ){
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void shift_left(int * arr, int size, int numRot ){
+    reverse(0, ((numRot - 1) % (size - 1)), arr);
+    reverse( ((numRot - 1) % (size - 1)) + 1, size - 1, arr);
+    reverse(0, size - 1, arr);
+}
+
+int main() {
+
+    int n, numRot;
+    scanf("%d %d\n", &n, &numRot);
+    int * arr = calloc(n, sizeof(int));
+    
+    for( int i = 0; i < n; i++ )
+        scanf("%d ", &arr[i]);
+    
+    shift_left(arr, n, numRot);
+    
+    print_array( arr, n );
+    free(arr);
+    return 0;
+}

@@ -1,0 +1,49 @@
+#include<iostream>
+#include<set>
+using namespace std;
+
+int t[2000000];
+set<pair<int,int> > st;
+int main()
+{
+    int n;
+    cin>>n;
+
+    for(int i=0;i<n;i++)
+    {
+        cin>>t[i];
+        if(i-t[i]>=0)
+        {
+            st.insert(make_pair(i-t[i],i));
+        }
+    }
+
+    int ans=st.size();
+    int mid=1;
+
+    for(int i=1;i<n;i++)
+    {
+        for(auto it=st.begin();it!=st.end();)
+        {
+            if(it->first<i)
+            {
+                auto tit=it;
+                it++;
+                st.erase(tit);
+            }
+            break;
+        }
+        if(n-1+i-t[i-1]>=i)
+        {
+            st.insert(make_pair(n-1+i-t[i-1],i));
+        }
+        if(st.size()>ans)
+        {
+            ans=st.size();
+            mid=i+1;
+        }
+        //ans=max(ans,st.s)
+    }
+    cout<<mid;
+    return 0;
+}
