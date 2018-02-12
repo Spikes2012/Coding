@@ -1,0 +1,94 @@
+abstract class Employee
+{ 
+ int empId;
+ String name;
+ double basicPay;
+ double perksPay;
+ Employee ( int a , String b ,double x , double y)
+ {
+     this.empId = a;
+     this.name = b;
+     this.basicPay = x;
+     this.perksPay = y;
+ }
+public String getName()
+{ String w = name;
+  return w;
+}
+public void setName(String w)
+{
+    name = w;
+}
+public double getBasicPay()
+{ double r = basicPay;
+  return r;
+}
+public void setBasicPay(double r)
+{
+    basicPay = r;
+}
+public double getPerksPay()
+{ double t = perksPay;
+  return t;
+}
+public void setPerksPay(double t)
+{
+    perksPay = t;
+}
+public int getEmpId()
+{ int u = empId;
+  return u;
+}
+public void setEmpId(int u)
+{ 
+    empId = u;
+}
+ 
+    public abstract double calculateSalary();
+}
+ class Associate extends Employee
+{
+     Associate(int e , String n , double ba , double p )
+     {
+    super(e,n,ba,p);
+     }
+public double calculateSalary()
+{
+ double sal = basicPay+perksPay;
+ return sal;
+}
+};
+class Consultant extends Employee
+{ 
+    double consultingFees;
+Consultant ( int i , String nam , double bp , double pp , double cf )
+    {
+        super(i,nam,bp,pp);
+        this.consultingFees = cf;
+    }
+    public double getConsultingFees()
+    {
+        double fees = consultingFees;
+        return fees;
+    }
+    public void setConsultingFees(double fees)
+    {
+        consultingFees = fees;
+    }
+    public double calculateSalary()
+{
+ double sal = basicPay+perksPay+consultingFees;
+ return sal;
+}
+}
+public class EmployeeDemo {
+    
+    public static void main ( String args[])
+    {
+        Employee e1 = new Associate( 1,"aaa",5000,7000);
+        Employee e2 = new Consultant(2,"bbb",3000,1000,5000);
+        System.out.println(e1.calculateSalary());
+        System.out.println(e2.calculateSalary());
+    }
+    
+}
